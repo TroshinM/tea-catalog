@@ -6,6 +6,18 @@ COPY src ./src
 RUN mvn clean package -DskipTests -DskipITs
 
 FROM eclipse-temurin:17-jre-alpine
+ARG PGPORT
+ARG PGDATABASE
+ARG PGUSER
+ARG PGPASSWORD
+ARG PORT
+ENV PGHOST=$PGHOST
+ENV PGPORT=$PGPORT
+ENV PGDATABASE=$PGDATABASE
+ENV PGUSER=$PGUSER
+ENV PGPASSWORD=$PGPASSWORD
+ENV PORT=$PORT
+
 WORKDIR /app
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring

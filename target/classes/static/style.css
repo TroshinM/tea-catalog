@@ -1,0 +1,26 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.filters {
+  margin-bottom: 20px;
+}
+
+.filters input, .filters button {
+  margin-right: 10px;
+}
+
+.tea-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+}
+
+.tea-image {
+  width: 100%;
+  height: auto;
+}

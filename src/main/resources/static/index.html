@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог чайного магазина</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Каталог чая</h1>
+
+<div class="filters">
+    <input type="text" id="searchInput" placeholder="Поиск по сорту, виду, добавкам, производителю...">
+    <label>Цена от: <input type="number" id="minPrice"></label>
+    <label>Цена до: <input type="number" id="maxPrice"></label>
+    <button onclick="loadTeas()">Найти</button>
+</div>
+
+<div id="teaList"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

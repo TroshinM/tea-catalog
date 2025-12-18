@@ -1,10 +1,19 @@
-FROM maven:3.8.4-openjdk-17 AS builder
+FROM maven:3.9-eclipse-temurin-17 AS builder
 WORKDIR /app
-COPY . .
-RUN mvn clean package -DskipTests
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+COPY src ./src
+RUN mvn clean package -DskipTests -DskipITs
 
-FROM openjdk:11
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+COPY --from=builder --chown=spring:spring /app/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", \
+    "-XX:+UseContainerSupport", \
+    "-XX:MaxRAMPercentage=75.0", \
+    "-Djava.security.egd=file:/dev/./urandom", \
+    "-jar", \
+    "/app/app.jar"]
